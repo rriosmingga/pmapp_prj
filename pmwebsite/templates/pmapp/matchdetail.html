@@ -1,0 +1,14 @@
+matchdetail.html<br/>
+
+{% if partido %}
+	<h1>Partido #{{ partido.id }}</h1>
+	<form action="{% url 'pmapp:index' %}" method="post">
+		{% csrf_token %}
+		{{ partido.team1.name_text }} <input type="text" name="local" size="2" maxlength="2"> vs <input type="text" name="visita" size="2" maxlength="2">{{ partido.team2.name_text }}
+		<input type="submit" value="Guardar" />
+	</form>
+    <br/><br/>
+    <a href="{% url 'pmapp:index' %}">volver</a>
+{% else %}
+    <p>No existe el partido buscado.</p>
+{% endif %}

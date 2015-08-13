@@ -3,7 +3,7 @@ index.html <br/>
 {% if lista_partidos %}
     <ul>
     {% for partido in lista_partidos %}
-        <li><a href="{% url 'pmapp:teamdetail' partido.team1.id %}">{{ partido.team1.name_text }}</a> vs <a href="{% url 'pmapp:teamdetail' partido.team2.id %}">{{ partido.team2.name_text }}</a></li>
+        <li><a href="{% url 'pmapp:teamdetail' partido.team1.id %}">{{ partido.team1.name_text }}</a> vs <a href="{% url 'pmapp:teamdetail' partido.team2.id %}">{{ partido.team2.name_text }}</a> <a href="{% url 'pmapp:matchdetail' partido.id %}">pronosticar</li>
     {% endfor %}
     </ul>
 {% else %}

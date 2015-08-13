@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 
 from pmapp.models import Equipo, Partido
@@ -14,5 +14,6 @@ def teamdetail(request, equipo_id):
 	return HttpResponse(response % equipo_id)
 	
 def matchdetail(request, partido_id):
-	response = "Estas en la pagina del partido %s."
-	return HttpResponse(response % partido_id)
+	partido = Partido.objects.get(pk=partido_id)
+	context = {'partido' : partido}
+	return render(request, 'pmapp/matchdetail.html', context)
