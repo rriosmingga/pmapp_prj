@@ -83,9 +83,9 @@
         	<h1>Sportradamus</h1>
         {% endif %}
         <br/>
-        <form action="{% url 'pmapp:index' %}" method="post">
+        <form action="{% url 'pmapp:predict' partido.id %}" method="post">
 			{% csrf_token %}
-			{{ partido.team1.name_text }} <input type="text" name="local" size="2" maxlength="2"> vs <input type="text" name="visita" size="2" maxlength="2">{{ partido.team2.name_text }} <br/><br/>
+			{{ partido.team1.name_text }} <input type="text" name="gteam1" size="2" maxlength="2"> vs <input type="text" name="gteam2" size="2" maxlength="2">{{ partido.team2.name_text }} <br/><br/>
 			<input type="submit" value="Enviar" />
 		</form>
       </div>

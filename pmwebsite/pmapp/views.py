@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from pmapp.models import *
 
@@ -32,3 +33,19 @@ def matchdetail(request, partido_id):
 		visita = (visita * 100)/total
 	context = {'partido' : partido, 'pronosticos' : pronosticos, 'total' : total, 'local' : local, 'empate' : empate, 'visita' : visita}
 	return render(request, 'pmapp/matchdetail.html', context)
+
+def predict(request, partido_id):
+	try:
+		match = Partido.objects.get(id=partido_id)
+		user = User.objects.get(username='rrios')
+		pronostico = PartidoPronostico(
+							match=match,
+							user=user,
+							gteam1=request.POST['gteam1'],
+							gteam2=request.POST['gteam2']
+		)
+		pronostico.save()
+	except Partido.DoesNotExist:
+		return HttpResponse('No existe el partido')
+	
+	return HttpResponseRedirect(reverse('pmapp:matchdetail', args=(partido_id)))
