@@ -1,11 +1,43 @@
-index.html <br/>
+<!DOCTYPE html>
 
-{% if lista_partidos %}
-    <ul>
-    {% for partido in lista_partidos %}
-        <li><a href="{% url 'pmapp:teamdetail' partido.team1.id %}">{{ partido.team1.name_text }}</a> vs <a href="{% url 'pmapp:teamdetail' partido.team2.id %}">{{ partido.team2.name_text }}</a> <a href="{% url 'pmapp:matchdetail' partido.id %}">pronosticar</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No hay partidos disponibles.</p>
-{% endif %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMAPP beta</title>
+ 
+    <!-- CSS en static -->
+    {% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'pmapp/css/style.css' %}" />
+    
+    <!-- CSS de Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+ 
+    <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Index PMAPP "{% static 'pmapp/style.css' %}"</h1>
+ 
+    <!-- Librería jQuery requerida por los plugins de JavaScript -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+ 
+    <!-- Todos los plugins JavaScript de Bootstrap (también puedes
+         incluir archivos JavaScript individuales de los únicos
+         plugins que utilices) -->
+    <script src="js/bootstrap.min.js"></script>
+    {% if lista_partidos %}
+	    <ul>
+	    {% for partido in lista_partidos %}
+	        <li><a href="{% url 'pmapp:teamdetail' partido.team1.id %}">{{ partido.team1.name_text }}</a> vs <a href="{% url 'pmapp:teamdetail' partido.team2.id %}">{{ partido.team2.name_text }}</a> --> <a href="{% url 'pmapp:matchdetail' partido.id %}">pronosticar</li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No hay partidos disponibles.</p>
+	{% endif %}
+  </body>
+</html>
