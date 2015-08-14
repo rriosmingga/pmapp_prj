@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>PM APP matchdetails</title>
+    <title>PM APP index</title>
 
     <!-- Bootstrap core CSS -->
     {% load staticfiles %}
@@ -77,44 +77,42 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-	    {% if partido %}
-			<h2>Partido #{{ partido.id }} - {{ partido.date }}</h2>
-		{% else %}
-        	<h1>Sportradamus</h1>
-        {% endif %}
-        <br/>
-        <form action="{% url 'pmapp:index' %}" method="post">
-			{% csrf_token %}
-			{{ partido.team1.name_text }} <input type="text" name="local" size="2" maxlength="2"> vs <input type="text" name="visita" size="2" maxlength="2">{{ partido.team2.name_text }} <br/><br/>
-			<input type="submit" value="Enviar" />
-		</form>
+        <h1>Sportradamus</h1>
+        <p>¿Sabes de fútbol?</p>
+        <p>Demuéstralo retando a tus amigos a acertar los resultados de los partidos más importantes a nivel mundial. </p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="#" role="button">Regístrate &raquo;</a>
+        </p>
       </div>
 
     </div> <!-- /container -->
-    <h2 class="sub-header">Pronosticos</h2>
+    <h2 class="sub-header">Próximos partidos</h2>
           
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th width="33%">Local: {{ local }}%</th>
-                  <th width="34%">Empate: {{ empate }}%</th>
-                  <th width="33%">Visita: {{ visita }}%</th>
+                  <th width="20%">Fecha</th>
+                  <th width="20%">Local</th>
+                  <th width="7%"></th>
+                  <th width="20%">Visita</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-	          {% if pronosticos %}
-			    {% for partido in pronosticos %}
+	          {% if lista_partidos %}
+			    {% for partido in lista_partidos %}
 			    	<tr>
-	                  <td>{{ total }}</td>
-	                  <td>0-0</td>
-	                  <td>0-1</td>
+	                  <td><a href="{% url 'pmapp:matchdetail' partido.id %}">{{ partido.date }}</a></td>
+	                  <td><a href="{% url 'pmapp:teamdetail' partido.team1.id %}">{{ partido.team1.name_text }}</a></td>
+	                  <td>vs</td>
+	                  <td><a href="{% url 'pmapp:teamdetail' partido.team2.id %}">{{ partido.team2.name_text }}</a></td>
+	                  <td><a href="{% url 'pmapp:matchdetail' partido.id %}">pronosticar</td> 
 					<tr>
 			    {% endfor %}
 			  {% else %}
 			    <tr>
-			    	<td colspan="5">No hay pronósticos para este partido.</td>
+			    	<td colspan="5">No hay partidos disponibles.</td>
 			    </tr> 
 			  {% endif %}              
               </tbody>
@@ -135,5 +133,3 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
-
-<br/>
