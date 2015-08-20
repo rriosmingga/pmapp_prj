@@ -114,12 +114,12 @@
                 </tr>
               </thead>
               <tbody>
-	          {% if resultados %}
-			    {% for resultado in resultados %}
+	          {% if resLoc %}
+			    {% for resultado in resLoc %}
 			    	<tr>
 	                  <td>{{ resultado }}</td>
-	                  <td>0-0</td>
-	                  <td>0-1</td>
+	                  <td></td>
+	                  <td></td>
 					<tr>
 			    {% endfor %}
 			  {% else %}
@@ -129,6 +129,17 @@
 			  {% endif %}              
               </tbody>
             </table>
+            <table>
+			    {% for row in resLoc %}
+			        <tr>
+			        {% for cell in row %}
+			            {% if forloop.first or forloop.parentloop.first %} <th> {% else %} <td> {% endif %}
+			                {{ cell }}
+			            {% if forloop.first or forloop.parentloop.first %} </th> {% else %} </td> {% endif %}
+			        {% endfor %}
+			        </tr>
+			    {% endfor %}
+			</table>
           </div>
 
 		  <footer class="footer">
