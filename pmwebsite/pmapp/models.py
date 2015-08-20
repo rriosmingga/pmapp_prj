@@ -21,6 +21,10 @@ class PartidoPronostico(models.Model):
 	user = models.ForeignKey(User)
 	gteam1 = models.SmallIntegerField(null=True, blank=True)
 	gteam2 = models.SmallIntegerField(null=True, blank=True)
+	
+	class Meta:
+		unique_together = ("match", "user")
+		
 	def __str__(self):
 		return "%s %s | %s - %s" % (self.user, self.match, self.gteam1, self.gteam2)
 	

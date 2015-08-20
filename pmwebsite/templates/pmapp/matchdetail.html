@@ -83,11 +83,21 @@
         	<h1>Sportradamus</h1>
         {% endif %}
         <br/>
-        <form action="{% url 'pmapp:predict' partido.id %}" method="post">
-			{% csrf_token %}
-			{{ partido.team1.name_text }} <input type="text" name="gteam1" size="2" maxlength="2"> vs <input type="text" name="gteam2" size="2" maxlength="2">{{ partido.team2.name_text }} <br/><br/>
-			<input type="submit" value="Enviar" />
-		</form>
+        {% if user.is_authenticated %}
+	        <form action="{% url 'pmapp:predict' partido.id %}" method="post">
+				{% csrf_token %}
+				{{ partido.team1.name_text }} <input type="text" name="gteam1" size="2" maxlength="2"> vs <input type="text" name="gteam2" size="2" maxlength="2">{{ partido.team2.name_text }}
+				<input type="hidden" name="userlogin" value="{{ user.username }}"> <br/><br/>
+				<input type="submit" value="Enviar" />
+			</form>
+		{% else %}
+			<form action="{% url 'pmapp:index' %}" method="post">
+				{% csrf_token %}
+				{{ partido.team1.name_text }} vs {{ partido.team2.name_text }}
+				<br/><br/>Inicie sesión para enviar su resultado<br/><br/>
+				<input type="submit" value="Login" />
+			</form>		
+		{% endif %}
       </div>
 
     </div> <!-- /container -->
@@ -104,10 +114,10 @@
                 </tr>
               </thead>
               <tbody>
-	          {% if pronosticos %}
-			    {% for partido in pronosticos %}
+	          {% if resultados %}
+			    {% for resultado in resultados %}
 			    	<tr>
-	                  <td>{{ total }}</td>
+	                  <td>{{ resultado }}</td>
 	                  <td>0-0</td>
 	                  <td>0-1</td>
 					<tr>
