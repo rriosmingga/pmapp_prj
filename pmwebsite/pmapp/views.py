@@ -34,27 +34,27 @@ def matchdetail(request, partido_id):
 			elif pronostico.gteam1 < pronostico.gteam2:
 				visita = visita + 1
 				resultado_repetido = False
-				for i in resEmp:
-					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
-						resultado_repetido = True
-						i[1] += 1
-				if resultado_repetido == False:
-					resEmp.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
-			else:
-				empate = empate + 1
-				resultado_repetido = False
 				for i in resVis:
 					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
 						resultado_repetido = True
 						i[1] += 1
 				if resultado_repetido == False:
 					resVis.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
+			else:
+				empate = empate + 1
+				resultado_repetido = False
+				for i in resEmp:
+					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
+						resultado_repetido = True
+						i[1] += 1
+				if resultado_repetido == False:
+					resEmp.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
 		total = local + empate + visita
 		if total > 0:
 			local = (local * 100)/total 
 			empate = (empate * 100)/total
 			visita = (visita * 100)/total
-		context = {'partido' : partido, 'pronosticos' : pronosticos, 'resLoc' : resLoc, 'resEmp' : resEmp, 'resVis' : resVis, 'total' : total, 'local' : local, 'empate' : empate, 'visita' : visita}
+		context = {'partido' : partido, 'pronosticos' : pronosticos, 'resLoc' : resLoc, 'resEmp' : resEmp, 'resVis' : resVis, 'total' : total, 'local' : local, 'empate' : empate, 'visita' : visita }
 	except Partido.DoesNotExist:
 		return HttpResponse('No existe el partido')
 		
