@@ -102,43 +102,42 @@
 
     </div> <!-- /container -->
     <h2 class="sub-header">Pronosticos</h2>
-          
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th width="33%">Local: {{ local }}%</th>
-                  <th width="34%">Empate: {{ empate }}%</th>
-                  <th width="33%">Visita: {{ visita }}%</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-	          {% if resLoc %}
-			    {% for resultado in resLoc %}
+			<table width="15%" style="float: left">
+			   <tr>
+			    <td align="center">Local: {{ local }}%</td>
+			   </tr>
+			   {% if resLoc %}
+			    {% for res in resLoc %}
 			    	<tr>
-	                  <td>{{ resultado }}</td>
-	                  <td></td>
-	                  <td></td>
+	                  <td align="center">{{ res.0 }} : {{ res.1 }}</td>
+					<tr>
+			    {% endfor %} 
+			  {% endif %} 
+			</table>
+			<table width="15%" style="float: left">
+			   <tr>
+			   	<td align="center">Empate: {{ empate }}%</td>
+			   </tr>
+			   {% if resEmp %} 
+			    {% for res in resEmp %}
+			    	<tr>
+	                  <td align="center">{{ res.0 }} : {{ res.1 }}</td>
 					<tr>
 			    {% endfor %}
-			  {% else %}
-			    <tr>
-			    	<td colspan="5">No hay pronósticos para este partido.</td>
-			    </tr> 
-			  {% endif %}              
-              </tbody>
-            </table>
-            <table>
-			    {% for row in resLoc %}
-			        <tr>
-			        {% for cell in row %}
-			            {% if forloop.first or forloop.parentloop.first %} <th> {% else %} <td> {% endif %}
-			                {{ cell }}
-			            {% if forloop.first or forloop.parentloop.first %} </th> {% else %} </td> {% endif %}
-			        {% endfor %}
-			        </tr>
+			  {% endif %} 
+			</table>
+			<table width="15%" style="float: left">
+			   <tr>	
+			   	<td align="center">Visita: {{ visita }}%</td>
+			   </tr>
+			   {% if resVis %}
+			    {% for res in resVis %}
+			    	<tr>
+	                  <td align="center">{{ res.0 }} : {{ res.1 }}</td>
+					<tr>
 			    {% endfor %}
+			  {% endif %} 
 			</table>
           </div>
 

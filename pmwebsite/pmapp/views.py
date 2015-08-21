@@ -29,6 +29,7 @@ def matchdetail(request, partido_id):
 					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
 						resultado_repetido = True
 						i[1] += 1
+						break
 				if resultado_repetido == False:
 					resLoc.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
 			elif pronostico.gteam1 < pronostico.gteam2:
@@ -38,6 +39,7 @@ def matchdetail(request, partido_id):
 					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
 						resultado_repetido = True
 						i[1] += 1
+						break
 				if resultado_repetido == False:
 					resVis.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
 			else:
@@ -47,6 +49,7 @@ def matchdetail(request, partido_id):
 					if i[0] == str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2):
 						resultado_repetido = True
 						i[1] += 1
+						break
 				if resultado_repetido == False:
 					resEmp.append([str(pronostico.gteam1) + ' - ' + str(pronostico.gteam2),1])
 		total = local + empate + visita
